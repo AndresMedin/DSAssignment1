@@ -1,0 +1,68 @@
+#include "MyArray.h"
+
+void MyArray::readFile(const string& filename) {
+    // Reads integers from a file and populates the array
+    ifstream file(filename);
+    int num;
+    while (file >> num) {
+        arr.push_back(num);
+    }
+    file.close();
+}
+
+int MyArray::checkNum(int num) {
+    // Checks if a number exists in the array and returns its index if found, otherwise returns -1
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == num)
+            return i;
+    }
+    return -1;
+}
+
+pair<int, int> MyArray::modifyValue(int index, int newValue) {
+    // Modifies the value at a specific index in the array and returns a pair of the old and new value
+    if (index >= arr.size() || index < 0)
+        throw out_of_range("Index out of range");
+    int oldValue = arr[index];
+    arr[index] = newValue;
+    return {oldValue, newValue};
+}
+
+void MyArray::addInteger(int num) {
+    // Adds an integer to the end of the array
+    arr.push_back(num);
+}
+
+void MyArray::replaceOrRemove(int index, bool remove) {
+    // Replaces or removes the value at a specific index in the array
+    if (index >= arr.size() || index < 0)
+        throw out_of_range("Index out of range");
+    if (remove) {
+        arr.erase(arr.begin() + index);
+    } else {
+        arr[index] = 0;
+    }
+}
+
+int MyArray::getSize() {
+    // Returns the size of the array
+    return arr.size();
+}
+
+int MyArray::getElementAt(int index) {
+    // Returns the value at a specific index in the array
+    if (index >= arr.size() || index < 0)
+        throw out_of_range("Index out of range");
+    return arr[index];
+}
+
+void MyArray::displayArray() {
+    // Displays the contents of the array
+    cout << "Array: [";
+    for (int i = 0; i < arr.size(); i++) {
+        cout << arr[i];
+        if (i != arr.size() - 1)
+            cout << ", ";
+    }
+    cout << "]" << endl;
+}
