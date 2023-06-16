@@ -1,0 +1,39 @@
+#include <vector>
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
+class MyArray {
+private:
+    vector<int> arr; // Private member variable to store the array
+
+public:
+    // Function to read integers from a file and populate the array
+    void readFile(const string& filename);
+
+    // Function to check if a number exists in the array
+    int checkNum(int num);
+
+    // Function to modify the value at a specific index in the array
+    // Returns a pair containing the original value and the new value
+    pair<int, int> modifyValue(int index, int newValue);
+
+    // Function to add an integer to the end of the array
+    void addInteger(int num);
+
+    // Function to replace or remove the value at a specific index in the array
+    // If 'remove' is true, the value is removed from the array; otherwise, it is replaced
+    void replaceOrRemove(int index, bool remove = false);
+
+    // Function to get the size of the array
+    int getSize();
+
+    // Function to get the element at a specific index in the array
+    int getElementAt(int index);
+
+    // Function to display the contents of the array
+    void displayArray();
+};
