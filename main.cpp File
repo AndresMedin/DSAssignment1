@@ -1,0 +1,69 @@
+#include "MyArray.h"
+
+int main() {
+    MyArray myArr; // Create an instance of MyArray class
+
+    // Read integers from a file and populate the array
+    myArr.readFile("data.txt");
+    cout << "Array size: " << myArr.getSize() << endl;
+
+    int searchNum;
+    cout << "Enter a number to search in the array (1-100): ";
+    cin >> searchNum;
+    cout << endl;
+
+    // Check if the number exists in the array and display its index if found
+    int index = myArr.checkNum(searchNum);
+    if (index != -1) {
+        cout << "Number found at index: " << index << endl;
+        cout << endl;
+
+        int newIndex;
+        cout << "Enter the index of the integer to modify: ";
+        cin >> newIndex;
+
+        int newValue;
+        cout << "Enter the new value: ";
+        cin >> newValue;
+        cout << endl;
+
+        try {
+            // Modify the value at the specified index and display the old and new value
+            pair<int, int> result = myArr.modifyValue(newIndex, newValue);
+            int oldValue = result.first;
+            int updatedValue = result.second;
+
+            cout << "Value at index " << newIndex << " is modified." << endl;
+            cout << "Old value: " << oldValue << endl;
+            cout << "New value: " << updatedValue << endl;
+            cout << endl;
+
+            cout << "Modified Array: ";
+            myArr.displayArray();  // Display the modified array
+        } catch (const out_of_range& e) {
+            cout << e.what() << endl; // Handle out of range exception
+        }
+    } else {
+        cout << "Number not found in the array." << endl;
+    }
+
+    try {
+        int newInteger;
+        cout << endl;
+        cout << "Enter a new integer to add to the array: ";
+        cin >> newInteger;
+        cout << endl;
+
+        // Add the new integer to the array
+        myArr.addInteger(newInteger);
+        cout << "Integer added to the array." << endl;
+        cout << endl;
+
+        cout << "Updated Array: ";
+        myArr.displayArray();  // Display the updated array
+    } catch (const exception& e) {
+        cout << e.what() << endl; // Handle exceptions
+    }
+
+    return 0;
+}
